@@ -1,5 +1,5 @@
 resource "aws_wafv2_ip_set" "api_gateway_ip_set" {
-  name               = "${var.stage}-${var.api_name}-ip-set"
+  name               = "${var.env_name}-${var.api_name}-ip-set"
   description        = "IP set for ${var.api_name}. Gives developers access to the API Gateway."
   scope              = "REGIONAL"
   ip_address_version = "IPV4"
@@ -7,7 +7,7 @@ resource "aws_wafv2_ip_set" "api_gateway_ip_set" {
 }
 
 resource "aws_wafv2_web_acl" "api_gateway_acl" {
-  name        = "${var.stage}-${var.api_name}-web-acl"
+  name        = "${var.env_name}-${var.api_name}-web-acl"
   description = "Web ACL for ${var.api_name} to restrict access to the API Gateway."
   scope       = "REGIONAL"
 
@@ -38,7 +38,7 @@ resource "aws_wafv2_web_acl" "api_gateway_acl" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = "${var.stage}-${var.api_name}-web-acl"
+    metric_name                = "${var.env_name}-${var.api_name}-web-acl"
     sampled_requests_enabled   = true
   }
 }
