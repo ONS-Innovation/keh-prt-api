@@ -1,6 +1,8 @@
 # Example .tfvars file
 # To use this, remove `.txt` from the filename and fill in variables accordingly.
 
-image_tag   = "latest"
-api_name    = "prt_api"
-stage       = "dev"
+image_tag           = "latest"
+api_name            = "prt_api"
+stage               = "dev"
+service_subdomain   = "prt-api"
+domain              = "sdp-dev"

@@ -7,7 +7,7 @@ import os
 # Import API routers for different versions
 from src.api.v0.api import router as api_v0_router
 
-env = os.getenv("environment", "dev")
+env = os.getenv("ENVIRONMENT", "dev")
 
 # Set root path to the environment variable
 # This is to match the API Gateway configuration

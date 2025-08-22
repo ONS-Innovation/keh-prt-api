@@ -4,15 +4,21 @@ resource "aws_lambda_function" "api_lambda" {
   image_uri     = "${data.aws_ecr_repository.api_ecr.repository_url}:${var.image_tag}"
   package_type  = "Image"
   architectures = ["x86_64"]
-   timeout     = 30
+  timeout       = 30
 
-   logging_config {
+  logging_config {
     log_format = "JSON"
-   }
-   vpc_config {
+  }
+  vpc_config {
     subnet_ids         = data.terraform_remote_state.vpc.outputs.private_subnets
     security_group_ids = [aws_security_group.lambda_sg.id]
-   }
+  }
+
+  environment {
+    variables = {
+      ENVIRONMENT = var.stage
+    }
+  }
 }
 
 resource "aws_cloudwatch_log_group" "api_lambda_log_group" {

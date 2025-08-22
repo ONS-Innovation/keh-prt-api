@@ -1,10 +1,10 @@
 resource "aws_cloudwatch_log_group" "api_gateway" {
-  name = "/aws/api_gateway/${var.stage}/${var.api_name}"
+  name              = "/aws/api_gateway/${var.stage}/${var.api_name}"
   retention_in_days = 30
 }
 
 resource "aws_iam_role" "cloudwatch" {
-  name = "${var.stage}_${var.api_name}_cloudwatch_role"
+  name = "${var.stage}-${var.api_name}-cloudwatch_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -18,7 +18,7 @@ resource "aws_iam_role" "cloudwatch" {
 }
 
 resource "aws_iam_policy" "cloudwatch" {
-  name        = "${var.stage}_${var.api_name}_cloudwatch_policy"
+  name = "${var.stage}-${var.api_name}-cloudwatch_policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -28,7 +28,9 @@ resource "aws_iam_policy" "cloudwatch" {
         "logs:PutLogEvents"
       ]
       Effect   = "Allow"
-      Resource = aws_cloudwatch_log_group.api_gateway.arn
+      Resource = [
+        "${aws_cloudwatch_log_group.api_gateway.arn}:*"
+      ]
     }]
   })
 }

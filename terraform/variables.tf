@@ -22,6 +22,24 @@ variable "stage" {
   default     = "dev"
 }
 
+variable "service_subdomain" {
+  description = "Service subdomain"
+  type        = string
+  default     = "prt-api"
+}
+
+variable "domain" {
+  description = "Domain"
+  type        = string
+  default     = "sdp-dev"
+}
+
+variable "domain_extension" {
+  description = "Domain extension"
+  type        = string
+  default     = "aws.onsdigital.uk"
+}
+
 variable "region" {
   description = "AWS region"
   type        = string

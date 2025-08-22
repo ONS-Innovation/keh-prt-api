@@ -14,3 +14,9 @@ variable "api_name" {
   type        = string
   default     = "prt_api"
 }
+
+variable "stage" {
+  description = "The stage of the API. This gets set as FastAPI's root path."
+  type        = string
+  default     = "dev"
+}
