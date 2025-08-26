@@ -12,3 +12,13 @@ data "terraform_remote_state" "vpc" {
     region = "eu-west-2"
   }
 }
+
+// Get DB Credentials secret name from prt_db terraform state
+data "terraform_remote_state" "db" {
+  backend = "s3"
+  config = {
+    bucket = "${var.env_name}-tf-state"
+    key    = "${var.env_name}-prt-db-rds/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}

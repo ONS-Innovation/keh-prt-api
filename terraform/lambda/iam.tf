@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "lambda_logging" {
     ]
 
     resources = [
-      aws_cloudwatch_log_group.api_lambda_log_group.arn,
+      "${aws_cloudwatch_log_group.api_lambda_log_group.arn}*",
     ]
   }
 }
@@ -69,4 +69,30 @@ resource "aws_iam_policy" "api_lambda_logging_policy" {
 resource "aws_iam_role_policy_attachment" "api_lambda_logging_attachment" {
   role       = aws_iam_role.api_lambda_role.name
   policy_arn = aws_iam_policy.api_lambda_logging_policy.arn
+}
+
+data "aws_iam_policy_document" "lambda_secret_manager" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "secretsmanager:GetSecretValue",
+    ]
+
+    resources = [
+      data.terraform_remote_state.db.outputs.db_credentials_secret_arn,
+    ]
+  }
+}
+
+resource "aws_iam_policy" "lambda_secret_manager_policy" {
+  name        = "${var.env_name}-${var.api_name}-lambda-secret-manager-policy"
+  description = "Policy for ${var.api_name} Lambda to access secrets in Secrets Manager"
+
+  policy = data.aws_iam_policy_document.lambda_secret_manager.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_secret_manager_attachment" {
+  role       = aws_iam_role.api_lambda_role.name
+  policy_arn = aws_iam_policy.lambda_secret_manager_policy.arn
 }
