@@ -1,8 +1,9 @@
+import os
+
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 from mangum import Mangum
-import os
 
 # Import API routers for different versions
 from src.api.v0.api import router as api_v0_router
@@ -30,4 +31,4 @@ app.include_router(api_v0_router, prefix="/api/v0", tags=["v0"])
 handler = Mangum(app)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

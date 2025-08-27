@@ -26,7 +26,7 @@ This API integrates with [PRT_DB](https://github.com/ONS-Innovation/keh-prt-db).
 
 The project is structured as follows:
 
-```
+```bash
 keh-prt-api/
 ├── src/                              # Source code for the FastAPI application
 │   ├── main.py                       # Entry point for the FastAPI application
@@ -57,22 +57,22 @@ To get started with the API, follow these steps:
 
 1. Create and activate a Python virtual environment.
 
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
 
 2. Install the required dependencies.
 
-  ```bash
-  poetry install
-  ```
+    ```bash
+    poetry install
+    ```
 
 3. Run the FastAPI application.
 
-  ```bash
-  uvicorn src.main:app --reload
-  ```
+    ```bash
+    uvicorn src.main:app --reload
+    ```
 
 4. Open your browser and navigate to `http://localhost:8000/docs` to view the API documentation and test the endpoints.
 
@@ -85,35 +85,35 @@ To deploy the API to AWS, we need to first build a Docker image and push it to A
 **Note:** These commands can be found within AWS ECR's console under the "View push commands" section.
 
 1. Login to AWS ECR:
-   
-  ```bash
-  aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
-  ```
 
-  **Note:** This requires the AWS CLI to be installed and configured with your AWS credentials. You can export them using:
+    ```bash
+    aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
+    ```
 
-  ```bash
-  export AWS_ACCESS_KEY_ID=<your-access-key-id>
-  export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
-  ```
+    **Note:** This requires the AWS CLI to be installed and configured with your AWS credentials. You can export them using:
+
+    ```bash
+    export AWS_ACCESS_KEY_ID=<your-access-key-id>
+    export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
+    ```
 
 2. Build the Docker image:
 
-  ```bash
-  docker build -t <your-image-name> .
-  ```
+    ```bash
+    docker build -t <your-image-name> .
+    ```
 
 3. Tag the Docker image:
 
-  ```bash
-  docker tag <your-image-name>:latest <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<repository-name>:<tag>
-  ```
+    ```bash
+    docker tag <your-image-name>:latest <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<repository-name>:<tag>
+    ```
 
 4. Push the Docker image to ECR:
 
-  ```bash
-  docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<repository-name>:<tag>
-  ```
+    ```bash
+    docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<repository-name>:<tag>
+    ```
 
 ### Terraform
 
@@ -148,33 +148,33 @@ Now that the Docker image is in ECR, we can use Terraform to resource the necess
 
 1. Change to the `terraform/` directory:
 
-  ```bash
-  cd terraform/
-  ```
+    ```bash
+    cd terraform/
+    ```
 
 2. Initialize Terraform:
 
-  ```bash
-  terraform init -backend-config="env/<env>/backend-<env>.tfbackend" -reconfigure
-  ``` 
+    ```bash
+    terraform init -backend-config="env/<env>/backend-<env>.tfbackend" -reconfigure
+    ```
 
 3. Refresh the Terraform state:
 
-  ```bash
-  terraform refresh -var-file="env/<env>/<env>.tfvars"
-  ```
+    ```bash
+    terraform refresh -var-file="env/<env>/<env>.tfvars"
+    ```
 
 4. Plan the Terraform deployment:
 
-  ```bash
-  terraform plan -var-file="env/<env>/<env>.tfvars"
-  ```
+    ```bash
+    terraform plan -var-file="env/<env>/<env>.tfvars"
+    ```
 
 5. Apply the Terraform deployment:
 
-  ```bash
-  terraform apply -var-file="env/<env>/<env>.tfvars"
-  ```
+    ```bash
+    terraform apply -var-file="env/<env>/<env>.tfvars"
+    ```
 
 6. Once the deployment is complete, you can access the API using the URL provided in the output of the `terraform apply` command.
 
@@ -204,22 +204,22 @@ The documentation is located in the `docs/` directory and can be served locally 
 
 1. Create and activate a virtual environment:
 
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
 
 2. Install dependencies
 
-  ```bash
-  poetry install --only docs
-  ```
+    ```bash
+    poetry install --only docs
+    ```
 
 3. Serve the documentation
 
-  ```bash
-  mkdocs serve
-  ```
+    ```bash
+    mkdocs serve
+    ```
 
 This will start a local development server and you can view the documentation at `http://localhost:8000`.
 
