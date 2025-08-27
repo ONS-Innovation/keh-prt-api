@@ -1,10 +1,11 @@
 import json
 import os
+from typing import Any
 
 import boto3
 
 
-def get_connection_parameters() -> dict[str, str]:
+def get_connection_parameters() -> dict[str, Any]:
     """Get database connection parameters.
 
     Returns:
