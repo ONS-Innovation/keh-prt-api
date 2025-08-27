@@ -1,3 +1,15 @@
+# Note: 
+# Within docker, this container runs as root as no user is specified.
+# Due to the nature of the lambda function, this is acceptable as Lambda defines the default user
+# to have the least-privilege permissions rather than the root user.
+
+# Therefore we can ignore the linting error for this Dockerfile
+# as it is not a security risk for this specific use case.
+
+# Ignored in .trivyignore also.
+#kics-scan disable=fd54f200-402c-4333-a5a4-36ef6709af2f
+#checkov:skip=CKV_DOCKER_3:Lambda makes default user lowest privilege
+
 FROM public.ecr.aws/lambda/python:3.12
 
 COPY pyproject.toml poetry.lock ${LAMBDA_TASK_ROOT}/
