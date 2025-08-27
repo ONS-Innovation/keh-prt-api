@@ -16,7 +16,7 @@ resource "aws_lambda_function" "api_lambda" {
 
   environment {
     variables = {
-      ENVIRONMENT = var.stage
+      ENVIRONMENT    = var.stage
       DB_SECRET_NAME = data.terraform_remote_state.db.outputs.db_credentials_secret_name
     }
   }

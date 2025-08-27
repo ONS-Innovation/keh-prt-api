@@ -139,7 +139,8 @@ resource "aws_api_gateway_domain_name" "api_gateway_domain" {
   }
 
   depends_on = [
-    aws_acm_certificate.api_gateway_certificate
+    aws_acm_certificate.api_gateway_certificate,
+    aws_acm_certificate_validation.cert
   ]
 }
 

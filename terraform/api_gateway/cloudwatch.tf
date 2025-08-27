@@ -27,7 +27,7 @@ resource "aws_iam_policy" "cloudwatch" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ]
-      Effect   = "Allow"
+      Effect = "Allow"
       Resource = [
         "${aws_cloudwatch_log_group.api_gateway.arn}:*"
       ]
