@@ -95,6 +95,7 @@ resource "aws_api_gateway_stage" "api_gateway_stage" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
   stage_name    = var.stage
   deployment_id = aws_api_gateway_deployment.api_gateway_deployment.id
+  xray_tracing_enabled = true
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gateway.arn
@@ -125,13 +126,14 @@ resource "aws_api_gateway_method_settings" "api_gateway_method_settings" {
     metrics_enabled    = true
     logging_level      = "INFO"
     data_trace_enabled = false
+    caching_enabled    = true
   }
 }
 
 // Create Domain Name
 resource "aws_api_gateway_domain_name" "api_gateway_domain" {
   domain_name = "${var.service_subdomain}.${var.domain}.${var.domain_extension}"
-
+  security_policy = "TLS_1_2"
   regional_certificate_arn = aws_acm_certificate.api_gateway_certificate.arn
 
   endpoint_configuration {

@@ -13,6 +13,9 @@ resource "aws_lambda_function" "api_lambda" {
     subnet_ids         = data.terraform_remote_state.vpc.outputs.private_subnets
     security_group_ids = [aws_security_group.lambda_sg.id]
   }
+  tracing_config {
+    mode = "Active"
+  }
 
   environment {
     variables = {
