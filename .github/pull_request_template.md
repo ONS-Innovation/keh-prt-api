@@ -21,6 +21,7 @@
 
 ## Checklist
 
+- [ ] I have read the [contributing guidelines](CONTRIBUTING.md).
 - [ ] I have tested the changes locally.
 - [ ] I have updated the documentation (if applicable).
 - [ ] I have added tests to cover my changes (if applicable).
