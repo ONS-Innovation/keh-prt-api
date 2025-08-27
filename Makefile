@@ -16,6 +16,18 @@ clean: ## Clean the temporary files.
 	rm -rf megalinter-reports
 	rm -rf site
 
+.PHONY: install
+install:  ## Install the dependencies excluding dev.
+	poetry install --only main
+
+.PHONY: install-dev
+install-dev:  ## Install the dependencies including dev.
+	poetry install
+
+.PHONY: install-docs
+install-docs:  ## Install only the documentation dependencies
+	poetry install --only docs
+
 .PHONY: py_lint
 py_lint:  ## Run all Python linters (black/ruff/pylint/mypy).
 	poetry run black --check src
