@@ -1,3 +1,4 @@
+---
 skip-check:
   # IAM Resourcing using wildcards
   - CKV_AWS_356

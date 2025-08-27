@@ -1,7 +1,7 @@
 # A GitHub Action to run Markdown linting on pull requests and pushes using markdownlint.
 ---
 name: Markdown Lint
-on:
+on: # yamllint disable-line rule:truthy
   pull_request:
     branches:
       - main

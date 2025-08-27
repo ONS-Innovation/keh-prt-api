@@ -1,7 +1,7 @@
 # A GitHub Actions workflow to deploy MkDocs documentation to GitHub Pages on push to the main branch.
 ---
 name: Deploy MkDocs
-on:
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
