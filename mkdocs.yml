@@ -4,7 +4,7 @@ repo_url: https://github.com/ONS-Innovation/keh-prt-api
 repo_name: keh-prt-api
 
 nav:
-  - Home: 'index.md'
+  - Home: "index.md"
 theme:
   name: material
   language: en
@@ -39,8 +39,6 @@ theme:
 
     - header.autohide
     - content.code.copy
-
-  
 
   logo: assets/logo.png
   favicon: assets/favicon.ico

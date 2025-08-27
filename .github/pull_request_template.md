@@ -1,3 +1,7 @@
+# Overview
+
+<!-- Provide a brief description of the changes made in this pull request. -->
+
 ## Pull Request Type
 
 - [ ] Bugfix
@@ -5,11 +9,7 @@
 - [ ] Documentation
 - [ ] Chore
 - [ ] Refactor
-- [ ] Other (please specify): <your description here>
-
-## Overview
-
-<!-- Provide a brief description of the changes made in this pull request. -->
+- [ ] Other (please specify): <!-- your description here -->
 
 ## Related Issues
 

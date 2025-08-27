@@ -1,15 +1,14 @@
 FROM public.ecr.aws/lambda/python:3.12
 
-COPY poetry.lock pyproject.toml ${LAMBDA_TASK_ROOT}/
-COPY src ${LAMBDA_TASK_ROOT}/src/
+COPY pyproject.toml poetry.lock ${LAMBDA_TASK_ROOT}/
 
 WORKDIR ${LAMBDA_TASK_ROOT}
 
-RUN pip install --upgrade pip
-RUN pip install poetry
+RUN pip install --no-cache-dir poetry==2.1.3 &&\
+    poetry config virtualenvs.create false &&\ 
+    poetry install --only main --no-root
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-root
+COPY src ${LAMBDA_TASK_ROOT}/src/
 
 HEALTHCHECK NONE
 
