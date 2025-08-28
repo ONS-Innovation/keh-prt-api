@@ -1,10 +1,10 @@
 resource "aws_lambda_function" "api_lambda" {
-  function_name = "${var.env_name}-${var.api_name}-lambda"
-  role          = aws_iam_role.api_lambda_role.arn
-  image_uri     = "${data.aws_ecr_repository.api_ecr.repository_url}:${var.image_tag}"
-  package_type  = "Image"
-  architectures = ["x86_64"]
-  timeout       = 30
+  function_name                  = "${var.env_name}-${var.api_name}-lambda"
+  role                           = aws_iam_role.api_lambda_role.arn
+  image_uri                      = "${data.aws_ecr_repository.api_ecr.repository_url}:${var.image_tag}"
+  package_type                   = "Image"
+  architectures                  = ["x86_64"]
+  timeout                        = 30
   reserved_concurrent_executions = 100
 
   logging_config {

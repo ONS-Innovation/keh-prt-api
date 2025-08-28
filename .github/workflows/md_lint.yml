@@ -8,6 +8,9 @@ on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
+
+permissions: read-all
+
 jobs:
   markdown-lint:
     runs-on: ubuntu-latest
