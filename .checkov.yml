@@ -19,3 +19,17 @@ skip-check:
   # It is not needed here since our Lambda functions use container
   # images over uploading .zip files for layers.
   - CKV_AWS_272
+
+  # API Gateway methods are unrestricted
+  # This is fine as there are other layers of security in place
+  # We want some endpoints (i.e. the health checks) to be publicly accessible
+  - CKV_AWS_59
+
+  # API Gateway requests are not validated
+  - CKV2_AWS_53
+
+  # Client certificate authentication is not used
+  - CKV2_AWS_51
+
+  # WAF Logging using Amazon Kinesis Data Firehose
+  - CKV2_AWS_31

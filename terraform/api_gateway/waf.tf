@@ -41,6 +41,23 @@ resource "aws_wafv2_web_acl" "api_gateway_acl" {
     metric_name                = "${var.env_name}-${var.api_name}-web-acl"
     sampled_requests_enabled   = true
   }
+
+  // Recommended by Checkov. Fixes CKV_AWS_129
+  rule {
+    name     = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+  }
 }
 
 resource "aws_wafv2_web_acl_association" "api_gateway_association" {

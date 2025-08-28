@@ -5,6 +5,7 @@ resource "aws_lambda_function" "api_lambda" {
   package_type  = "Image"
   architectures = ["x86_64"]
   timeout       = 30
+  reserved_concurrent_executions = 100
 
   logging_config {
     log_format = "JSON"
