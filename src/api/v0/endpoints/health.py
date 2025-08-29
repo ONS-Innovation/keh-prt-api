@@ -1,5 +1,5 @@
 import psycopg
-from fastapi import APIRouter, status, Response
+from fastapi import APIRouter, Response, status
 
 from .utils.db import get_connection_parameters
 
@@ -34,7 +34,7 @@ async def database_health_check(response: Response) -> dict[str, str]:
 
     try:
         conn = psycopg.connect(**get_connection_parameters())
-    except psycopg.OperationalError as e:
+    except psycopg.OperationalError:
         response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
         return {"status": "unhealthy"}
 

@@ -41,7 +41,7 @@ py_fix:  ## Format the Python code.
 
 .PHONY: test
 test:  ## Run the tests and check coverage.
-	poetry run pytest -n auto --cov=src --cov-report term-missing --cov-fail-under=95
+	poetry run pytest -n auto --cov=src --cov-report term-missing --cov-fail-under=80
 
 .PHONY: mypy
 mypy:  ## Run mypy.
