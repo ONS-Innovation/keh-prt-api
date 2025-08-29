@@ -21,6 +21,10 @@ This API integrates with [PRT_DB](https://github.com/ONS-Innovation/keh-prt-db).
   - [Documentation](#documentation)
     - [Documentation Deployment](#documentation-deployment)
   - [Linting and Formatting](#linting-and-formatting)
+    - [Python Linting](#python-linting)
+    - [Markdown Linting](#markdown-linting)
+    - [Megalinter](#megalinter)
+    - [Linting GitHub Actions](#linting-github-actions)
 
 ## Project Structure
 
@@ -231,4 +235,51 @@ This is available within [`.github/workflows/deploy_mkdocs.yml`](.github/workflo
 
 ## Linting and Formatting
 
-TODO
+### Python Linting
+
+This repository uses the following linters for Python:
+
+- [Black](https://github.com/psf/black) : Code formatting
+- [Ruff](https://github.com/astral-sh/ruff) : Linting + Code formatting (this should eventually replace Black)
+- [MyPy](https://github.com/python/mypy) : Static type checking
+
+Run the linter using the following commands:
+
+```bash
+make py_lint # Run all Python linters
+```
+
+```bash
+make py_fix # Run all Python linters and fix issues
+```
+
+### Markdown Linting
+
+This repository uses [Markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) for linting Markdown files.
+
+Run the linter using the following commands:
+
+```bash
+make md_lint # Run Markdown linter
+```
+
+```bash
+make md_fix # Run Markdown linter and fix issues
+```
+
+### Megalinter
+
+This repository also makes use of [Megalinter](https://github.com/oxsecurity/megalinter) as a "catch all" linter.
+This will deal with any linting issues that are not covered by the other linters.
+
+Run the linter using the following commands:
+
+```bash
+make megalint
+```
+
+### Linting GitHub Actions
+
+All linters are run automatically via GitHub Actions on every push and pull request to the `main` branch.
+
+These workflows can be found in the `.github/workflows/` directory.
