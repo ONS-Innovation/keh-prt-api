@@ -25,6 +25,8 @@ This API integrates with [PRT_DB](https://github.com/ONS-Innovation/keh-prt-db).
     - [Markdown Linting](#markdown-linting)
     - [Megalinter](#megalinter)
     - [Linting GitHub Actions](#linting-github-actions)
+  - [Testing](#testing)
+    - [Unit Testing](#unit-testing)
 
 ## Project Structure
 
@@ -283,3 +285,18 @@ make megalint
 All linters are run automatically via GitHub Actions on every push and pull request to the `main` branch.
 
 These workflows can be found in the `.github/workflows/` directory.
+
+## Testing
+
+### Unit Testing
+
+This repository uses Pytest for unit testing.
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+These tests also get run automatically via GitHub Actions on every push and pull request to the `main` branch.
+If the test coverage is below 80%, the GitHub Action will fail, indicating that additional tests are needed to meet the coverage requirement.
