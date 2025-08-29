@@ -1,14 +1,12 @@
-import logging
-
 import psycopg
-from fastapi import APIRouter
+from fastapi import APIRouter, status, Response
 
 from .utils.db import get_connection_parameters
 
 router = APIRouter(prefix="/health", tags=["health"])
 
 
-@router.get("")
+@router.get("", status_code=status.HTTP_200_OK)
 async def health_check() -> dict[str, str]:
     """Health check endpoint.
 
@@ -18,9 +16,12 @@ async def health_check() -> dict[str, str]:
     return {"status": "healthy"}
 
 
-@router.get("/database")
-async def database_health_check() -> dict[str, str]:
+@router.get("/database", status_code=status.HTTP_200_OK)
+async def database_health_check(response: Response) -> dict[str, str]:
     """Database health check endpoint.
+
+    Args:
+        response (Response): The FastAPI response object. This carries a response code if it is anything other than the default.
 
     Returns:
         dict: A dictionary containing the database health status.
@@ -32,23 +33,16 @@ async def database_health_check() -> dict[str, str]:
     #     return {"status": "unhealthy"}
 
     try:
-        conn = psycopg.connect(
-            **get_connection_parameters(),
-            keepalives=1,
-            keepalives_idle=60,
-            keepalives_interval=10,
-            keepalives_count=5,
-        )
-    except Exception as e:
-        print(f"Database connection failed: {e}")
-        logging.error(f"Database connection failed: {e}")
+        conn = psycopg.connect(**get_connection_parameters())
+    except psycopg.OperationalError as e:
+        response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
         return {"status": "unhealthy"}
 
     with conn, conn.cursor() as cur:
         cur.execute("SELECT 1")
 
         if not cur.fetchone():
-            print("Database query failed")
+            response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
             return {"status": "unhealthy"}
 
     return {"status": "healthy"}

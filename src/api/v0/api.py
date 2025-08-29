@@ -1,11 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 
 from .endpoints import health
 
 router = APIRouter()
 
 
-@router.get("")
+@router.get("", status_code=status.HTTP_200_OK)
 async def root() -> dict[str, str]:
     return {
         "message": "Welcome to the PRT API v0.",
