@@ -33,3 +33,6 @@ skip-check:
 
   # WAF Logging using Amazon Kinesis Data Firehose
   - CKV2_AWS_31
+
+  # API Gateway caching is not enabled
+  - CKV_AWS_120
