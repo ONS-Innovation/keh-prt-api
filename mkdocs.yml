@@ -6,6 +6,8 @@ repo_name: keh-prt-api
 
 nav:
   - Home: "index.md"
+  - Infrastructure: "infrastructure.md"
+  - Authentication + Access Controls: "authentication.md"
 theme:
   name: material
   language: en
