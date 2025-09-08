@@ -165,7 +165,7 @@ Now that the Docker image is in ECR, we can use Terraform to resource the necess
     cd terraform/
     ```
 
-2. Initialize Terraform:
+2. Initialise Terraform:
 
     ```bash
     terraform init -backend-config="env/<env>/backend-<env>.tfbackend" -reconfigure
