@@ -1,3 +1,4 @@
+// IP Set to allowlist developer IPs for API Gateway access
 resource "aws_wafv2_ip_set" "api_gateway_ip_set" {
   name               = "${var.env_name}-${var.api_name}-ip-set"
   description        = "IP set for ${var.api_name}. Gives developers access to the API Gateway."
@@ -6,6 +7,7 @@ resource "aws_wafv2_ip_set" "api_gateway_ip_set" {
   addresses          = [] // Empty for now. To be populated manually by developers.
 }
 
+// WAFv2 Web ACL to restrict access to the API Gateway using the IP Set
 resource "aws_wafv2_web_acl" "api_gateway_acl" {
   name        = "${var.env_name}-${var.api_name}-web-acl"
   description = "Web ACL for ${var.api_name} to restrict access to the API Gateway."
@@ -66,6 +68,8 @@ resource "aws_wafv2_web_acl" "api_gateway_acl" {
   }
 }
 
+// Associate the WAFv2 Web ACL with the API Gateway stage
+// This means that WAF will inspect all requests to the API Gateway
 resource "aws_wafv2_web_acl_association" "api_gateway_association" {
   resource_arn = aws_api_gateway_stage.api_gateway_stage.arn
   web_acl_arn  = aws_wafv2_web_acl.api_gateway_acl.arn

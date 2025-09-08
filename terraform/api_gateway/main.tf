@@ -1,5 +1,4 @@
-
-
+// Create the API Gateway
 resource "aws_api_gateway_rest_api" "api_gateway" {
   name        = "${var.stage}-${var.api_name}-gateway"
   description = "API Gateway for ${var.api_name}"
@@ -95,6 +94,7 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   }
 }
 
+// Create API Gateway Stage
 resource "aws_api_gateway_stage" "api_gateway_stage" {
   rest_api_id          = aws_api_gateway_rest_api.api_gateway.id
   stage_name           = var.stage

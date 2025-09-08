@@ -1,3 +1,4 @@
+// Create Lambda function for API
 resource "aws_lambda_function" "api_lambda" {
   function_name                  = "${var.env_name}-${var.api_name}-lambda"
   role                           = aws_iam_role.api_lambda_role.arn
@@ -26,6 +27,7 @@ resource "aws_lambda_function" "api_lambda" {
   }
 }
 
+// Create CloudWatch Log Group for Lambda function
 resource "aws_cloudwatch_log_group" "api_lambda_log_group" {
   name              = "/aws/lambda/${aws_lambda_function.api_lambda.function_name}"
   retention_in_days = 14

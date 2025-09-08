@@ -1,6 +1,8 @@
 # Example .tfvars file
 # To use this, remove `.txt` from the filename and fill in variables accordingly.
 
+# Do NOT commit the real tfvars file to GitHub
+
 env_name            = "sdp-dev"
 image_tag           = "latest"
 api_name            = "prt_api"

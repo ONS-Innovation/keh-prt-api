@@ -1,3 +1,4 @@
+// Lambda security group
 resource "aws_security_group" "lambda_sg" {
   name        = "${var.env_name}-${var.api_name}-lambda-sg"
   description = "Security group for ${var.api_name} Lambda function"

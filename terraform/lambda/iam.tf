@@ -13,6 +13,7 @@ resource "aws_iam_role" "api_lambda_role" {
   assume_role_policy = data.aws_iam_policy_document.api_lambda_assume_role_policy.json
 }
 
+// IAM policy for VPC permissions
 data "aws_iam_policy_document" "vpc_permissions" {
   statement {
     effect = "Allow"
@@ -43,6 +44,7 @@ resource "aws_iam_role_policy_attachment" "vpc_policy" {
   policy_arn = aws_iam_policy.vpc_permissions.arn
 }
 
+// IAM policy for CloudWatch logging
 data "aws_iam_policy_document" "lambda_logging" {
   statement {
     effect = "Allow"
@@ -71,6 +73,7 @@ resource "aws_iam_role_policy_attachment" "api_lambda_logging_attachment" {
   policy_arn = aws_iam_policy.api_lambda_logging_policy.arn
 }
 
+// IAM policy for Secrets Manager access
 data "aws_iam_policy_document" "lambda_secret_manager" {
   statement {
     effect = "Allow"
