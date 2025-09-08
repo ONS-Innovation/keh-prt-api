@@ -10,6 +10,7 @@ This API integrates with [PRT_DB](https://github.com/ONS-Innovation/keh-prt-db).
   - [Project Structure](#project-structure)
   - [Local Development](#local-development)
     - [Contributing](#contributing)
+    - [Prerequisites](#prerequisites)
     - [Getting Started](#getting-started)
   - [Deployment to AWS](#deployment-to-aws)
     - [Push Docker Image to ECR](#push-docker-image-to-ecr)
@@ -57,6 +58,12 @@ keh-prt-api/
 
 Contributions to this project are welcome. Please read the [CONTRIBUTING](./.github/CONTRIBUTING.md) file for more information on how to contribute and the standards we expect.
 
+### Prerequisites
+
+- Python 3.12 or higher
+- [Poetry](https://python-poetry.org/) for dependency management
+  - Must use Poetry v2.1 or higher (this can be checked using `poetry --version`)
+
 ### Getting Started
 
 To get started with the API, follow these steps:
@@ -71,7 +78,7 @@ To get started with the API, follow these steps:
 2. Install the required dependencies.
 
     ```bash
-    poetry install
+    poetry install --only main
     ```
 
 3. Run the FastAPI application.
@@ -236,6 +243,18 @@ This repository hosts its documentation using GitHub Pages. The documentation is
 This is available within [`.github/workflows/deploy_mkdocs.yml`](.github/workflows/deploy_mkdocs.yml).
 
 ## Linting and Formatting
+
+Before linting or formatting, ensure you have the development dependencies installed:
+
+```bash
+poetry install --only dev
+```
+
+Or if you want to install all dependencies (including main and docs):
+
+```bash
+poetry install
+```
 
 ### Python Linting
 
