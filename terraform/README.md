@@ -25,7 +25,7 @@ These variables can be configured using a `.tfvars` file. See `/env/dev/dev.tfva
 
 **Note:** `.tfvars` files should *never* be committed to version control. Take extra care when handling these files.
 
-#### Applying Terraform Configuration
+## Applying Terraform Configuration
 
 Now that the Docker image is in ECR, we can use Terraform to resource the necessary AWS infrastructure to run the API.
 
