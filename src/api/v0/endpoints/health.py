@@ -26,7 +26,6 @@ async def database_health_check(response: Response) -> dict[str, str]:
     Returns:
         dict: A dictionary containing the database health status.
     """
-
     try:
         conn = psycopg.connect(**get_connection_parameters())
     except psycopg.OperationalError:
