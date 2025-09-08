@@ -3,7 +3,7 @@
 ---
 name: MegaLinter
 
-# Trigger mega-linter at every push. Action will also be visible from
+# Trigger mega-linter at every push to main. Action will also be visible from
 # Pull Requests to main
 on: # yamllint disable-line rule:truthy
   push:

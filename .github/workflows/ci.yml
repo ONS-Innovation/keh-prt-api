@@ -1,3 +1,4 @@
+# A GitHub Actions workflow to run linting (Python) and tests on push and pull requests to the main branch.
 ---
 name: CI
 
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   lint-test:
     name: Lint and Test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
