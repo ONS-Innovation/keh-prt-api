@@ -1,0 +1,76 @@
+// IP Set to allowlist developer IPs for API Gateway access
+resource "aws_wafv2_ip_set" "api_gateway_ip_set" {
+  name               = "${var.env_name}-${var.api_name}-ip-set"
+  description        = "IP set for ${var.api_name}. Gives developers access to the API Gateway."
+  scope              = "REGIONAL"
+  ip_address_version = "IPV4"
+  addresses          = [] // Empty for now. To be populated manually by developers.
+}
+
+// WAFv2 Web ACL to restrict access to the API Gateway using the IP Set
+resource "aws_wafv2_web_acl" "api_gateway_acl" {
+  name        = "${var.env_name}-${var.api_name}-web-acl"
+  description = "Web ACL for ${var.api_name} to restrict access to the API Gateway."
+  scope       = "REGIONAL"
+
+  default_action {
+    block {}
+  }
+
+  rule {
+    name     = "Allow-Listed-IPs"
+    priority = 1
+
+    action {
+      allow {}
+    }
+
+    statement {
+      ip_set_reference_statement {
+        arn = aws_wafv2_ip_set.api_gateway_ip_set.arn
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AllowListedIPs"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = true
+    metric_name                = "${var.env_name}-${var.api_name}-web-acl"
+    sampled_requests_enabled   = true
+  }
+
+  // Recommended by Checkov. Fixes CKV_AWS_129
+  rule {
+    name     = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+}
+
+// Associate the WAFv2 Web ACL with the API Gateway stage
+// This means that WAF will inspect all requests to the API Gateway
+resource "aws_wafv2_web_acl_association" "api_gateway_association" {
+  resource_arn = aws_api_gateway_stage.api_gateway_stage.arn
+  web_acl_arn  = aws_wafv2_web_acl.api_gateway_acl.arn
+}

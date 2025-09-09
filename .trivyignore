@@ -1,0 +1,17 @@
+# Ignore Dockerfile user due to Lambda
+AVD-DS-0002
+
+# Ignore KMS Encryption
+AVD-AWS-0017
+
+# Ignore unrestricted egress to any IP address
+# SPP use the same pattern so it's not a concern for us
+AVD-AWS-0104
+
+# Ignore wildcarded resource in IAM policy
+AVD-AWS-0057
+
+# API Gateway methods are unrestricted
+# This is fine as there are other layers of security in place
+# We want some endpoints (i.e. the health checks) to be publicly accessible
+AVD-AWS-0004
