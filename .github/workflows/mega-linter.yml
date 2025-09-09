@@ -12,7 +12,7 @@ on: # yamllint disable-line rule:truthy
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read # Changed to read since we don't allow autofix
   issues: write
   pull-requests: write
   statuses: write
@@ -58,7 +58,7 @@ jobs:
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues, and post new Pull Requests; remove the ones you do not need
     permissions:
-      contents: write
+      contents: read # Changed to read since we don't allow autofix
       issues: write
       pull-requests: write
       statuses: write
